@@ -1,0 +1,10 @@
+#ignore notebook
+main.ipynb
+
+#ignore genereted files
+.DS_Store
+*/.DS_Store
+
+#ignore Pycache
+__pycache__/
+*/__pycache__/

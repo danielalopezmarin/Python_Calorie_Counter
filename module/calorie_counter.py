@@ -1,3 +1,5 @@
+from module.exceptions import MealTooBigError
+
 meals = {
    'Hamburger': 600,
    'Cheese Burger': 750,
@@ -25,4 +27,6 @@ def calorie_counter(*items):
             total += calorie_counter (*combos [item])
         else:
             print (f"{item} not found in the menu")
+    if total > 2000:
+        raise MealTooBigError(total)
     return total
