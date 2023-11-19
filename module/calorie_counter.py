@@ -1,4 +1,4 @@
-from module.data import meals, combos
+from module.complexdata import combos, meals
 from module.exceptions import MealTooBigError
 
 def calorie_counter(*items):
