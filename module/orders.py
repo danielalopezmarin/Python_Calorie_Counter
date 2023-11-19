@@ -1,3 +1,4 @@
+from module.exceptions import MealTooBigError
 from module.functions import calorie_counter, price_counter
 
 
@@ -29,20 +30,30 @@ class Order:
         Order.counter += 1
         self.order_id = f"order-{Order.counter}"
         self.items = items
-        self.calories = None
+        self._calories = None
         self._price = None
-
-
-        self.order_accepted = False
-        self.order_refused_reason = None
-        self.date = date 
-     
+        try:
+            self.calories
+        except (MealTooBigError) as e:
+            self.order_accepted = False
+            self.order_refused_reason = e.message
+            self._calories = 0
+            self._price = 0
+        else:
+            self.order_accepted = True
+            self.order_refused_reason = None
+        self.date = date
 
     @property
     def calories (self):
-        pass
-
+        if self._calories is None:
+            self._calories = calorie_counter(self.items)
+        return self._calories 
+    
+    
     @property
     def price (self):
-        pass
+        if self._price is None:
+            self._price = price_counter(self.items)
+        return self._price 
 
